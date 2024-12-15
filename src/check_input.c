@@ -55,8 +55,8 @@ int check_input(int ac, char **av)
     if (ac != 5 && ac != 6)
     {
         printf("%s", error_messages[0]);
-        printf("Usage:\n");
-        printf("  ./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals (optional)]\n\n");
+        print_error("Usage:\n");
+        print_error("  ./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals (optional)]\n\n");
         is_valid = 0;
     }
     if (ac == 6)
