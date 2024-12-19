@@ -4,32 +4,71 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h> 
+#include <unistd.h>
+#include <time.h>
+#include <sys/time.h>
 
-typedef struct s_simulation
+# define RESET		"\033[0m"
+# define RED		"\033[0;31m"
+// # define GREEN		"\033[0;32m"
+// # define YELLOW		"\033[0;33m"
+// # define PURPLE		"\033[0;34m"
+// # define PINK		"\033[0;35m"
+// # define BLUE		"\033[0;36m"
+
+
+typedef struct s_simulation_data
 {
-    int                 num_philos;        
-    int                 time_to_die;       
-    int                 time_to_eat;       
-    int                 time_to_sleep;    
-    int                 meals_required;    
-    pthread_mutex_t     *forks;  
+    int                 is_ready;           
+    int                 eating_time;        
+    int                 dying_time;         
+    int                 sleeping_time;      
+    int                 eating_count;       
+    int                 is_over;            
+    int                 philosophers_count; 
+    int                 has_check_sum;      
+    int                 eaten_count;        
+    pthread_mutex_t     *print_lock;        
+    pthread_mutex_t     *forks;             
 }               t_simulation;
 
 typedef struct s_philosopher
 {
-    int             id;
-    int             meal_eaten;
-    long int        last_meal_time;
-    pthread_t       thread_id;
-    pthread_mutex_t *left_fork;
-    pthread_mutex_t *right_fork;             
-    t_simulation     *sim_params; 
+    int                 philosopher_id;     
+    int                 meal_count;       
+    long int            start_time;         
+    long int            last_meal_time;    
+    pthread_t           thread_id;          
+    pthread_mutex_t     *left_fork;          
+    pthread_mutex_t     *right_fork;        
+    t_simulation   *simulation_params;  
 }               t_philosopher;
 
+//ch_input.c
+int     ft_isdigit(int c);
+int     is_positive_integer(const char *str);
+int     ft_atoi(const char *str);
+int     check_input(int ac, char **av);
+void    print_error(char *str);
 
-int check_input(int ac, char **av);
-int	ft_atoi(const char *str);
-int is_positive_integer(const char *str);
-int ft_isdigit(int c);
+
+void free_simulation(t_simulation *simulation);
+
+
+t_simulation *init_sim_data(char **argv);
+t_philosopher *init_philosophers(t_simulation *simulation);
+void run_threads(t_philosopher *philosophers, t_simulation *simulation);
+void join_threads(t_philosopher *philosophers);
+void create_threads(t_philosopher *philosophers);
+
+uint64_t	current_time(void);
+void	ft_usleep(long int time);
+void output_status(t_philosopher *p, int i);
+void cleanup_sim(t_philosopher *p);
+
+void *routine(void *phil);
+void philo_eat(t_philosopher *p);
+int check_death(t_philosopher *p);
+void check_threads(t_philosopher *p);
 
 #endif

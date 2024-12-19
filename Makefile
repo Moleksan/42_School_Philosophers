@@ -6,7 +6,7 @@ NAME       = philosophers
 SRCS_DIR   = src
 OBJS_DIR   = obj
 INC_DIR    = include
-SRCS       = main.c check_input.c
+SRCS       = main.c ch_input.c setup.c threads.c tools.c 
 
 SRCS_F     = $(addprefix $(SRCS_DIR)/, $(SRCS))
 OBJS       = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

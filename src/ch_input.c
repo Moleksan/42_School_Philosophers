@@ -77,3 +77,9 @@ int check_input(int ac, char **av)
     }
     return (is_valid);
 }
+
+void	print_error(char *str)
+{
+	printf("%s", str);
+}
+
