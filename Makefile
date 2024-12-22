@@ -2,7 +2,7 @@
 CC         = gcc
 CC_FLAGS   = -Wall -Wextra -Werror -g
 
-NAME       = philosophers
+NAME       = philo
 SRCS_DIR   = src
 OBJS_DIR   = obj
 INC_DIR    = include
