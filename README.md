@@ -1,6 +1,6 @@
 # 🏛️ Dining Philosophers
 
-![Your Image Here]([image_url](https://github.com/Moleksan/42_School_Philosophers/blob/main/_29f14337-1c4f-436e-823f-d63072f4cd9b%20(1).jpeg))
+![Your Image Here]([[image_url](https://github.com/Moleksan/42_School_Philosophers/blob/main/_29f14337-1c4f-436e-823f-d63072f4cd9b%20(1).jpeg)](https://github.com/Moleksan/42_School_Philosophers/blob/main/Phils.jpeg?raw=true))
 
 ## 📖 Introduction  
 You are here to explore one of the classic philosophical (and computer science) questions: **why philosophers, why forks, and what on earth is going on with spaghetti?** Don’t worry, get comfortable — I’ll explain everything.  
