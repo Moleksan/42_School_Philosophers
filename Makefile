@@ -1,38 +1,44 @@
+NAME = Philos
 
-CC         = gcc
-CC_FLAGS   = -Wall -Wextra -Werror -g
+# Указываем исходные файлы, относительные к текущей папке (от папки, где находится Makefile)
+SRC = main/main.c main/valid.c main/init_philo.c main/debug.c main/init_simulation.c main/tools.c
+OBJ = $(SRC:.c=.o)
 
-NAME       = philo
-SRCS_DIR   = src
-OBJS_DIR   = obj
-INC_DIR    = include
-SRCS       = main.c ch_input.c setup.c threads.c tools.c 
+# Папка с заголовочными файлами
+INC = include
+CFLAGS = -Wextra -Werror -Wall -pthread -I $(INC)
 
-SRCS_F     = $(addprefix $(SRCS_DIR)/, $(SRCS))
-OBJS       = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+# Убираем объектные файлы и исполнимые файлы
+RM = rm -rf
+CC = gcc
 
+# Основная цель
 all: $(NAME)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@echo "Compiling: $<"
-	$(CC) $(CC_FLAGS) -I$(INC_DIR) -c $< -o $@
+# Правило компиляции объектов из исходников
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "\033[0;35m⚙️ Compiling: $< ⚙️\033[0m"
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+# Линковка объектных файлов в исполнимый файл
+$(NAME): $(OBJ)
+	@$(CC) $(OBJ) -o $(NAME) $(CFLAGS)
+	@echo "\033[0;32m🎉 $(NAME) ready to go! 🚀🎉\033[0m"
 
-$(NAME): $(OBJS)
-	@echo "Linking: $(NAME)"
-	$(CC) $(CC_FLAGS) $(OBJS) -o $(NAME)
-	@echo "Done"
-
+# Очистка объектных файлов
 clean:
-	@rm -rf $(OBJS_DIR)
-	@echo "Objects cleaned."
+	@$(RM) $(OBJ)
+	@rm -f debug_log.txt
+	@echo "\033[0;34m🧹 Object files cleaned! 🧹\033[0m"
 
+# Полная очистка
 fclean: clean
-	@rm -f $(NAME)
-	@echo "Executable removed."
+	@$(RM) $(NAME)
+	@echo "\033[0;31m❌ Executable $(NAME) removed! ❌\033[0m"
 
+# Пересборка проекта
 re: fclean all
 
+# Убираем файлы, которые не являются реальными
 .PHONY: all clean fclean re
+
