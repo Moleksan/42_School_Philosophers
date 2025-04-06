@@ -1,9 +1,9 @@
 NAME = Philos
 
-SRC = main/main.c main/valid.c main/init_philo.c main/debug.c main/init_simulation.c main/tools.c
+SRC = main/main.c main/valid.c main/routine.c main/init.c main/threads.c main/tools.c
 OBJ = $(SRC:.c=.o)
 
-INC = include
+INC = head
 CFLAGS = -Wextra -Werror -Wall -pthread -I $(INC)
 
 RM = rm -rf
