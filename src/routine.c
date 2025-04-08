@@ -6,7 +6,7 @@
 /*   By: moleksan <moleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 23:16:02 by moleksan          #+#    #+#             */
-/*   Updated: 2025/04/07 00:41:17 by moleksan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:07:46 by moleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	threads_wait(t_sim *sim)
 	int	i;
 
 	if (pthread_join(sim->check, NULL) != 0)
-		destroy_all(sim, sim->forks);
+		destroy_all(sim);
 	i = 0;
 	while (i < sim->philos[0].total_philos)
 	{
 		if (pthread_join(sim->philos[i].thread, NULL) != 0)
-			destroy_all(sim, sim->forks);
+			destroy_all(sim);
 		i++;
 	}
 	return (0);

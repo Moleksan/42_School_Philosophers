@@ -6,7 +6,7 @@
 /*   By: moleksan <moleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 23:29:00 by moleksan          #+#    #+#             */
-/*   Updated: 2025/04/07 00:42:06 by moleksan         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:52:25 by moleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	init_mutx_frk(t_info *philos, t_sim *simulation,
 void	print_action(t_info *philo, const char *action);
 size_t	get_time(void);
 int		ft_usleep(size_t milliseconds);
-void	destroy_all(t_sim *program, pthread_mutex_t *forks);
+void	destroy_all(t_sim *program);
 
 #endif

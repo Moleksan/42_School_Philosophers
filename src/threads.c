@@ -6,7 +6,7 @@
 /*   By: moleksan <moleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 21:29:27 by moleksan          #+#    #+#             */
-/*   Updated: 2025/04/07 00:25:04 by moleksan         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:56:37 by moleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	threads_start(t_sim *sim)
 
 	if (pthread_create(&sim->check, NULL, &control, sim) != 0)
 	{
-		destroy_all(sim, sim->forks);
+		destroy_all(sim);
 		return (1);
 	}
 	i = 0;
@@ -27,7 +27,7 @@ int	threads_start(t_sim *sim)
 		if (pthread_create(&sim->philos[i].thread, NULL,
 				&routine, &sim->philos[i]) != 0)
 		{
-			destroy_all(sim, sim->forks);
+			destroy_all(sim);
 			return (1);
 		}
 		i++;

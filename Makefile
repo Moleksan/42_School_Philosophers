@@ -1,6 +1,6 @@
-NAME = Philos
+NAME = philo
 
-SRC = main/main.c main/valid.c main/routine.c main/init.c main/threads.c main/tools.c
+SRC = src/main.c src/valid.c src/routine.c src/init.c src/threads.c src/tools.c
 OBJ = $(SRC:.c=.o)
 
 INC = head
@@ -19,6 +19,14 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) -o $(NAME) $(CFLAGS)
 	@echo "\033[0;32m🎉 $(NAME) ready to go! 🚀🎉\033[0m"
 
+valgrind: all
+	@echo "\033[0;36m🔍 Running Valgrind... 🔍\033[0m"
+	@$(VALGRIND)
+
+hellgrind: all
+	@echo "\033[0;31m🔥 Running Hellgrind (thread checker)... 🔥\033[0m"
+	@$(HELLGRIND)
+
 clean:
 	@$(RM) $(OBJ)
 	@rm -f debug_log.txt
@@ -31,4 +39,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-

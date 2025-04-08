@@ -6,24 +6,37 @@
 /*   By: moleksan <moleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 21:27:16 by moleksan          #+#    #+#             */
-/*   Updated: 2025/04/07 00:41:05 by moleksan         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:00:42 by moleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/philos.h"
 
-void	destroy_all(t_sim *program, pthread_mutex_t *forks)
+void	destroy_all(t_sim *program)
 {
 	int	i;
 
 	i = 0;
+	if (program->philos && program->forks)
+	{
+		while (i < program->philos[0].total_philos)
+		{
+			pthread_mutex_destroy(&program->forks[i]);
+			i++;
+		}
+	}
+	if (program->forks)
+	{
+		free(program->forks);
+		program->forks = NULL;
+	}
 	pthread_mutex_destroy(&program->log_mutex);
 	pthread_mutex_destroy(&program->meal_mutex);
 	pthread_mutex_destroy(&program->death_mutex);
-	while (i < program->philos[0].total_philos)
+	if (program->philos)
 	{
-		pthread_mutex_destroy(&forks[i]);
-		i++;
+		free(program->philos);
+		program->philos = NULL;
 	}
 }
 
@@ -33,7 +46,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_time();
 	while ((get_time() - start) < milliseconds)
-		usleep(300);
+		usleep(150);
 	return (0);
 }
 
